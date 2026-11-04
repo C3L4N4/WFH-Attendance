@@ -1,6 +1,19 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { Get, Req, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { Roles } from './roles.decorator';
+import { RolesGuard } from './roles.guard';
+
+interface AuthenticatedRequest extends Request {
+  user: {
+    sub: number;
+    email: string;
+    role: 'EMPLOYEE' | 'HRD';
+  };
+}
 
 @Controller('auth')
 export class AuthController {
@@ -9,5 +22,14 @@ export class AuthController {
   @Post('login')
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
+  }
+
+  @Get('hrd-test')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('HRD')
+  getHrdTest() {
+    return {
+      message: 'Welcome, HRD administrator!',
+    };
   }
 }
