@@ -1,15 +1,33 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/useAuth'
 
 function Topbar({ onMenuClick }) {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
 
   const pageNames = {
     '/employee/dashboard': 'Dashboard',
     '/employee/attendance': 'Attendance',
     '/employee/history': 'History',
+    '/hrd/dashboard': 'Dashboard',
   }
 
   const pageTitle = pageNames[location.pathname] || 'Dashboard'
+
+  const displayName = user?.employee?.fullName || user?.email || 'User'
+
+  const initials = displayName
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+
+  function handleLogout() {
+    logout()
+    navigate('/login', { replace: true })
+  }
 
   return (
     <header className="topbar">
@@ -36,12 +54,19 @@ function Topbar({ onMenuClick }) {
         </button>
 
         <div className="topbar-profile">
-          <div className="profile-avatar">JD</div>
+          <div className="profile-avatar">{initials}</div>
           <div className="profile-info">
-            <strong>John Doe</strong>
-            <span>Employee</span>
+            <strong>{displayName}</strong>
+            <span>{user?.role || 'User'}</span>
           </div>
         </div>
+
+        <button
+          className="logout-button"
+          onClick={handleLogout}
+        >
+          Sign out
+        </button>
       </div>
     </header>
   )

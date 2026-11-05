@@ -63,4 +63,32 @@ export class AuthService {
       },
     };
   }
+  async getProfile(userId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        employee: true,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User account not found');
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      employee: user.employee
+        ? {
+            id: user.employee.id,
+            employeeNumber: user.employee.employeeNumber,
+            fullName: user.employee.fullName,
+            department: user.employee.department,
+          }
+        : null,
+    };
+  }
 }

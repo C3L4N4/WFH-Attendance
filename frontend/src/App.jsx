@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import DashboardLayout from './layouts/DashboardLayout'
 import EmployeeDashboard from './pages/EmployeeDashboard'
 import Login from './pages/Login'
+import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
 function PlaceholderPage({ title }) {
@@ -20,30 +21,35 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
-
         <Route path="/login" element={<Login />} />
 
-        <Route element={<DashboardLayout />}>
-          <Route
-            path="/employee/dashboard"
-            element={<EmployeeDashboard />}
-          />
+        {/* Employee-only routes */}
+        <Route element={<ProtectedRoute allowedRoles={['EMPLOYEE']} />}>
+          <Route element={<DashboardLayout />}>
+            <Route
+              path="/employee/dashboard"
+              element={<EmployeeDashboard />}
+            />
+            <Route
+              path="/employee/attendance"
+              element={<PlaceholderPage title="Attendance" />}
+            />
+            <Route
+              path="/employee/history"
+              element={<PlaceholderPage title="Attendance History" />}
+            />
+          </Route>
+        </Route>
 
+        {/* HRD-only routes */}
+        <Route element={<ProtectedRoute allowedRoles={['HRD']} />}>
           <Route
-            path="/employee/attendance"
-            element={<PlaceholderPage title="Attendance" />}
-          />
-
-          <Route
-            path="/employee/history"
-            element={<PlaceholderPage title="Attendance History" />}
+            path="/hrd/dashboard"
+            element={<PlaceholderPage title="HRD Dashboard" />}
           />
         </Route>
 
-        <Route
-          path="*"
-          element={<Navigate to="/login" replace />}
-        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   )
