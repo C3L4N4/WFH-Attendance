@@ -5,6 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '../prisma/prisma.service';
 import { Request } from 'express';
 
 interface AuthenticatedRequest extends Request {
@@ -17,8 +18,10 @@ interface AuthenticatedRequest extends Request {
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
-
+  constructor(
+    private jwtService: JwtService,
+    private prisma: PrismaService,
+  ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context
       .switchToHttp()
@@ -33,14 +36,43 @@ export class JwtAuthGuard implements CanActivate {
     const token = authHeader.split(' ')[1];
 
     try {
-      const payload = await this.jwtService.verifyAsync(
-        token,
-      );
+      const payload = await this.jwtService.verifyAsync(token);
 
-      request.user = payload;
+      if (
+        typeof payload.sub !== 'number' ||
+        typeof payload.email !== 'string'
+      ) {
+        throw new UnauthorizedException('Invalid token payload');
+      }
+
+      const user = await this.prisma.user.findUnique({
+        where: { id: payload.sub },
+        include: {
+          employee: true,
+        },
+      });
+
+      if (!user) {
+        throw new UnauthorizedException('User account not found');
+      }
+
+      if (user.role === 'EMPLOYEE' && !user.employee?.isActive) {
+        throw new UnauthorizedException('Employee account is inactive');
+      }
+
+      request.user = {
+        sub: user.id,
+        email: user.email,
+        role: user.role,
+      };
 
       return true;
-    } catch {
+
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+
       throw new UnauthorizedException('Invalid or expired token');
     }
   }

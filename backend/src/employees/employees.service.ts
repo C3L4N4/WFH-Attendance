@@ -93,4 +93,13 @@ export class EmployeesService {
             data: { isActive: false },
         });
     }
+
+    async activate(id: number) {
+        await this.findOne(id);
+
+        return this.prisma.employee.update({
+            where: { id },
+            data: { isActive: true },
+        });
+    }
 }

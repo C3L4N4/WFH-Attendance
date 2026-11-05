@@ -49,4 +49,9 @@ export class EmployeesController {
     deactivate(@Param('id', ParseIntPipe) id: number) {
         return this.employeesService.deactivate(id);
     }
+
+    @Patch(':id/activate')
+    async activate(@Param('id', ParseIntPipe) id: number) {
+        return this.employeesService.activate(id);
+    }
 }

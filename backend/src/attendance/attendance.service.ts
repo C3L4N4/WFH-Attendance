@@ -8,6 +8,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAttendanceDto } from './dto/create-attendance.dto';
+import { FilterAttendanceDto } from './dto/filter-attendance.dto';
 
 @Injectable()
 export class AttendanceService {
@@ -60,19 +61,37 @@ export class AttendanceService {
         }
     }
 
-    async findAll() {
-        return this.prisma.attendance.findMany({
+    async findAll(filters: FilterAttendanceDto) {
+    const where: Prisma.AttendanceWhereInput = {};
+
+    if (filters.employeeId) {
+        where.employeeId = filters.employeeId;
+    }
+
+    if (filters.date) {
+        const startDate = new Date(`${filters.date}T00:00:00.000Z`);
+        const endDate = new Date(startDate);
+        endDate.setUTCDate(endDate.getUTCDate() + 1);
+
+        where.attendanceDate = {
+            gte: startDate,
+            lt: endDate,
+        };
+    }
+
+    return this.prisma.attendance.findMany({
+        where,
             include: {
-            employee: {
-                select: {
-                employeeNumber: true,
-                fullName: true,
-                department: true,
-                position: true,
+                employee: {
+                    select: {
+                    employeeNumber: true,
+                    fullName: true,
+                    department: true,
+                    position: true,
+                    },
                 },
             },
-            },
-            orderBy: {
+                orderBy: {
                 submittedAt: 'desc',
             },
         });
