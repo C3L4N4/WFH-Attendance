@@ -1,22 +1,52 @@
 import { NavLink } from 'react-router-dom'
-
-const navigation = [
-  {
-    label: 'OVERVIEW',
-    items: [
-      { name: 'Dashboard', icon: '▦', path: '/employee/dashboard' },
-    ],
-  },
-  {
-    label: 'WORKSPACE',
-    items: [
-      { name: 'Attendance', icon: '◷', path: '/employee/attendance' },
-      { name: 'History', icon: '▤', path: '/employee/history' },
-    ],
-  },
-]
+import { useAuth } from '../context/useAuth'
 
 function Sidebar({ isOpen, onNavigate }) {
+  const { user } = useAuth()
+
+  const isHRD = user?.role === 'HRD'
+
+  const displayName = user?.employee?.fullName || user?.email || 'User'
+
+  const initials = displayName
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+
+  const navigation = isHRD
+    ? [
+        {
+          label: 'OVERVIEW',
+          items: [
+            { name: 'Dashboard', icon: '▦', path: '/hrd/dashboard' },
+          ],
+        },
+        {
+          label: 'MANAGEMENT',
+          items: [
+            { name: 'Employees', icon: '♙', path: '/hrd/employees' },
+            { name: 'Attendance', icon: '◷', path: '/hrd/attendance' },
+          ],
+        },
+      ]
+    : [
+        {
+          label: 'OVERVIEW',
+          items: [
+            { name: 'Dashboard', icon: '▦', path: '/employee/dashboard' },
+          ],
+        },
+        {
+          label: 'WORKSPACE',
+          items: [
+            { name: 'Attendance', icon: '◷', path: '/employee/attendance' },
+            { name: 'History', icon: '▤', path: '/employee/history' },
+          ],
+        },
+      ]
+
   return (
     <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
       <div className="sidebar-brand">
@@ -50,11 +80,13 @@ function Sidebar({ isOpen, onNavigate }) {
       </nav>
 
       <div className="sidebar-footer">
-        <div className="sidebar-avatar">JD</div>
+        <div className="sidebar-avatar">{initials}</div>
+
         <div className="sidebar-user">
-          <strong>John Doe</strong>
-          <span>Employee</span>
+          <strong>{displayName}</strong>
+          <span>{user?.role || 'Employee'}</span>
         </div>
+
         <span className="user-menu">···</span>
       </div>
     </aside>

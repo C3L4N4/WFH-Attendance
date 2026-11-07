@@ -1,9 +1,16 @@
+
+/* =========================================
+   GLOBAL LAYOUT
+========================================= */
+
 .app-layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* Sidebar */
+/* =========================================
+   SIDEBAR
+========================================= */
 
 .sidebar {
   width: 250px;
@@ -103,8 +110,10 @@
 
 .sidebar-avatar,
 .profile-avatar {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  aspect-ratio: 1 / 1;
   background: #dce9fa;
   color: #245da5;
   border-radius: 50%;
@@ -113,11 +122,6 @@
   font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
 }
 
 .sidebar-user {
@@ -138,7 +142,9 @@
   font-size: 20px;
 }
 
-/* Login page */
+/* =========================================
+   LOGIN PAGE
+========================================= */
 
 .login-page {
   min-height: 100vh;
@@ -240,6 +246,7 @@
   font-size: 13px;
   font-weight: 600;
   transition: background 0.2s;
+  cursor: pointer;
 }
 
 .login-button:hover {
@@ -313,26 +320,9 @@
   font-size: 11px;
 }
 
-@media (max-width: 800px) {
-  .login-page {
-    grid-template-columns: 1fr;
-  }
-
-  .login-panel {
-    min-height: 100vh;
-    padding: 35px 28px;
-  }
-
-  .login-brand {
-    margin-bottom: 55px;
-  }
-
-  .login-decoration {
-    display: none;
-  }
-}
-
-/* Logout button */
+/* =========================================
+   BUTTONS
+========================================= */
 
 .logout-button {
   border: 1px solid #e2e8f0;
@@ -350,7 +340,23 @@
   background: #f1f5f9;
 }
 
-/* Main layout */
+.secondary-button {
+  padding: 9px 13px;
+  border: 1px solid #dce3eb;
+  border-radius: 6px;
+  background: white;
+  color: #40536b;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: #f8fafc;
+}
+
+/* =========================================
+   MAIN LAYOUT AND TOPBAR
+========================================= */
 
 .main-layout {
   flex: 1;
@@ -398,6 +404,7 @@
   font-size: 22px;
   color: #243247;
   padding: 5px;
+  cursor: pointer;
 }
 
 .sidebar-overlay {
@@ -441,7 +448,9 @@
   color: #8491a3;
 }
 
-/* Dashboard */
+/* =========================================
+   DASHBOARD
+========================================= */
 
 .main-content {
   padding: 36px;
@@ -528,19 +537,6 @@
   margin: 0 0 7px;
 }
 
-.secondary-button {
-  padding: 9px 13px;
-  border: 1px solid #dce3eb;
-  border-radius: 6px;
-  background: white;
-  color: #40536b;
-  font-size: 11px;
-}
-
-.secondary-button:hover {
-  background: #f8fafc;
-}
-
 .empty-state {
   min-height: 230px;
   display: flex;
@@ -572,7 +568,801 @@
   font-size: 11px;
 }
 
-/* Responsive */
+/* =========================================
+   EMPLOYEE DASHBOARD
+========================================= */
+
+.dashboard-error {
+  margin-bottom: 20px;
+}
+
+.dashboard-recent-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-history-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dashboard-recent-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.dashboard-recent-row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) 110px;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 12px;
+  border-top: 1px solid #e7ebf0;
+}
+
+.dashboard-recent-date {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.dashboard-recent-date strong {
+  color: #243247;
+}
+
+.dashboard-recent-date span {
+  color: #8491a3;
+  font-size: 11px;
+}
+
+.dashboard-recent-notes {
+  color: #64748b;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   ATTENDANCE SUBMISSION
+========================================= */
+
+.attendance-form-card {
+  max-width: 850px;
+}
+
+.attendance-intro {
+  margin-bottom: 28px;
+}
+
+.attendance-intro h2 {
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+
+.attendance-intro p {
+  color: #8491a3;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.attendance-form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.attendance-form-card input[type="file"] {
+  padding: 12px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 7px;
+  background: #f8fafc;
+}
+
+.attendance-form-card small {
+  color: #8491a3;
+  font-size: 11px;
+}
+
+.attendance-preview img {
+  display: block;
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 8px;
+  object-fit: contain;
+  border: 1px solid #e2e8f0;
+}
+
+.attendance-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.attendance-notes textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dce3eb;
+  border-radius: 7px;
+  resize: vertical;
+  font-size: 13px;
+  display: block;
+  box-sizing: border-box;
+  min-height: 110px;
+}
+
+.attendance-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  border-radius: 7px;
+  background: #ecfdf3;
+  border: 1px solid #b7ebc6;
+  color: #18743a;
+  font-size: 13px;
+}
+
+.attendance-success span {
+  font-weight: 700;
+}
+
+.attendance-submit {
+  max-width: 220px;
+  margin-top: 2px;
+}
+
+.attendance-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* =========================================
+   ATTENDANCE HISTORY
+========================================= */
+
+.history-card {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 300px;
+  padding: 28px;
+}
+
+.history-card .section-heading {
+  margin-bottom: 24px;
+}
+
+.history-card .section-heading h2 {
+  font-size: 17px;
+}
+
+.history-card .section-heading p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.history-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+}
+
+.history-table {
+  width: 100%;
+  min-width: 850px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.history-table th:nth-child(1),
+.history-table td:nth-child(1) {
+  width: 22%;
+  min-width: 180px;
+}
+
+.history-table th:nth-child(2),
+.history-table td:nth-child(2) {
+  width: 22%;
+  min-width: 180px;
+}
+
+.history-table th:nth-child(3),
+.history-table td:nth-child(3) {
+  width: 38%;
+}
+
+.history-table th:nth-child(4),
+.history-table td:nth-child(4) {
+  width: 18%;
+}
+
+.history-notes {
+  overflow-wrap: anywhere;
+}
+
+.history-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #ecfdf3;
+  border: 1px solid #b7ebc6;
+  color: #18743a;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.history-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border: 1px solid #dce3eb;
+  border-radius: 7px;
+  background: white;
+  color: #2868c7;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.history-action-button:hover {
+  background: #f1f6fd;
+  border-color: #b9cde8;
+}
+
+.history-empty-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #2868c7;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.history-empty-link:hover {
+  text-decoration: underline;
+}
+
+.history-message {
+  padding: 60px 20px;
+  text-align: center;
+  color: #8491a3;
+  font-size: 13px;
+}
+
+/* =========================================
+   HRD EMPLOYEE MANAGEMENT
+========================================= */
+
+.employee-add-button {
+  cursor: pointer;
+}
+
+.employee-feedback {
+  margin-bottom: 18px;
+}
+
+.employee-form-card {
+  margin-bottom: 24px;
+}
+
+.employee-form {
+  margin-top: 24px;
+}
+
+.employee-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.employee-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.employee-form-actions button {
+  cursor: pointer;
+}
+
+.employee-name-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.employee-name-cell strong {
+  color: #243247;
+}
+
+.employee-name-cell span {
+  color: #8491a3;
+  font-size: 11px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.employee-table td:last-child {
+  min-width: 160px;
+}
+
+.employee-table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.employee-deactivate-button,
+.employee-activate-button,
+.employee-edit-button {
+  padding: 7px 11px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.employee-deactivate-button {
+  color: #bd3434;
+  background: #fff0f0;
+  border: 1px solid #f4cccc;
+}
+
+.employee-activate-button {
+  color: #18743a;
+  background: #ecfdf3;
+  border: 1px solid #b7ebc6;
+}
+
+.employee-edit-button {
+  color: #2868c7;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.employee-edit-button:hover {
+  background: #dbeafe;
+}
+
+.employee-inactive-status {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  border: 1px solid #dce3eb;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* =========================================
+   HRD ATTENDANCE MONITORING
+========================================= */
+
+.monitoring-filter-card {
+  margin-bottom: 24px;
+}
+
+.monitoring-filter-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.monitoring-filter-form input,
+.monitoring-filter-form select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #dce3eb;
+  border-radius: 7px;
+  background: white;
+  color: #334155;
+  font-size: 12px;
+}
+
+.monitoring-filter-form input:focus,
+.monitoring-filter-form select:focus {
+  outline: none;
+  border-color: #3678df;
+  box-shadow: 0 0 0 3px rgba(54, 120, 223, 0.1);
+}
+
+.monitoring-filter-actions {
+  display: flex;
+  gap: 9px;
+}
+
+.monitoring-filter-actions button {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.monitoring-filter-actions .login-button {
+  padding: 11px 15px;
+}
+
+.monitoring-feedback {
+  margin-bottom: 20px;
+}
+
+.monitoring-records-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.monitoring-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+}
+
+.monitoring-table {
+  width: 100%;
+  min-width: 1150px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.monitoring-table th:nth-child(1),
+.monitoring-table td:nth-child(1) {
+  width: 19%;
+}
+
+.monitoring-table th:nth-child(2),
+.monitoring-table td:nth-child(2) {
+  width: 13%;
+}
+
+.monitoring-table th:nth-child(3),
+.monitoring-table td:nth-child(3) {
+  width: 14%;
+}
+
+.monitoring-table th:nth-child(4),
+.monitoring-table td:nth-child(4) {
+  width: 13%;
+}
+
+.monitoring-table th:nth-child(5),
+.monitoring-table td:nth-child(5) {
+  width: 25%;
+}
+
+.monitoring-table th:nth-child(6),
+.monitoring-table td:nth-child(6) {
+  width: 16%;
+}
+
+.monitoring-employee-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.monitoring-employee-cell strong {
+  color: #243247;
+}
+
+.monitoring-employee-cell span {
+  color: #8491a3;
+  font-size: 11px;
+}
+
+.monitoring-notes {
+  overflow-wrap: anywhere;
+  min-width: 0;
+  max-width: none;
+}
+
+.monitoring-photo-button {
+  padding: 8px 12px;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  background: #eff6ff;
+  color: #2868c7;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.monitoring-photo-button:hover {
+  background: #dbeafe;
+}
+
+/* =========================================
+   ATTENDANCE PHOTO VIEWER
+========================================= */
+
+.photo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.photo-modal {
+  width: 100%;
+  max-width: 750px;
+  max-height: 90vh;
+  overflow: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.photo-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid #e7ebf0;
+}
+
+.photo-modal-header h2 {
+  margin: 0;
+  color: #243247;
+  font-size: 16px;
+}
+
+.photo-modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.photo-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding: 24px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.photo-modal-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  border-radius: 7px;
+}
+
+/* =========================================
+   HRD DASHBOARD
+========================================= */
+
+.hrd-recent-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+.hrd-recent-card .history-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+}
+
+.hrd-recent-card .hrd-recent-table {
+  width: 100%;
+  min-width: 950px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.hrd-recent-table th:nth-child(1),
+.hrd-recent-table td:nth-child(1) {
+  width: 20%;
+}
+
+.hrd-recent-table th:nth-child(2),
+.hrd-recent-table td:nth-child(2) {
+  width: 16%;
+}
+
+.hrd-recent-table th:nth-child(3),
+.hrd-recent-table td:nth-child(3) {
+  width: 20%;
+}
+
+.hrd-recent-table th:nth-child(4),
+.hrd-recent-table td:nth-child(4) {
+  width: 20%;
+}
+
+.hrd-recent-table th:nth-child(5),
+.hrd-recent-table td:nth-child(5) {
+  width: 24%;
+}
+
+.hrd-recent-table .monitoring-employee-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.hrd-quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.hrd-quick-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.hrd-quick-link:hover {
+  background: #f8fafc;
+  border-color: #bfdbfe;
+}
+
+.hrd-quick-link h3 {
+  margin: 0 0 8px;
+  color: #243247;
+  font-size: 14px;
+}
+
+.hrd-quick-link p {
+  margin: 0;
+  color: #8491a3;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.hrd-quick-link > span {
+  color: #2868c7;
+  font-size: 22px;
+}
+
+/* =========================================
+   GLOBAL TABLE STANDARDIZATION
+========================================= */
+
+.history-table thead th,
+.employee-table thead th,
+.monitoring-table thead th,
+.hrd-recent-table thead th {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 17px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.history-table tbody td,
+.employee-table tbody td,
+.monitoring-table tbody td,
+.hrd-recent-table tbody td {
+  padding: 19px 18px;
+  color: #334155;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+
+.history-table th,
+.history-table td,
+.employee-table th,
+.employee-table td,
+.monitoring-table th,
+.monitoring-table td,
+.hrd-recent-table th,
+.hrd-recent-table td {
+  border: 1px solid #e2e8f0;
+}
+
+.history-table th:last-child,
+.history-table td:last-child,
+.employee-table th:last-child,
+.employee-table td:last-child,
+.monitoring-table th:last-child,
+.monitoring-table td:last-child,
+.hrd-recent-table th:last-child,
+.hrd-recent-table td:last-child {
+  border-right: 1px solid #e2e8f0;
+}
+
+.history-table tbody tr:hover td,
+.employee-table tbody tr:hover td,
+.monitoring-table tbody tr:hover td,
+.hrd-recent-table tbody tr:hover td {
+  background-color: #f1f5f9;
+}
+
+.history-table tbody tr,
+.employee-table tbody tr,
+.monitoring-table tbody tr,
+.hrd-recent-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.employee-table-actions {
+  justify-content: center;
+}
+
+.history-table .history-status,
+.hrd-recent-table .history-status {
+  margin: 0 auto;
+}
+
+/* =========================================
+   FINAL TABLE TYPOGRAPHY STANDARDIZATION
+========================================= */
+
+.history-table th,
+.employee-table th,
+.monitoring-table th,
+.hrd-recent-table th {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.history-table td,
+.employee-table td,
+.monitoring-table td,
+.hrd-recent-table td {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
 
 @media (max-width: 850px) {
   .sidebar {
@@ -585,6 +1375,66 @@
   }
 
   .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .monitoring-filter-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .monitoring-filter-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 800px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-panel {
+    min-height: 100vh;
+    padding: 35px 28px;
+  }
+
+  .login-brand {
+    margin-bottom: 55px;
+  }
+
+  .login-decoration {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard-recent-row {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .dashboard-recent-notes {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .dashboard-recent-row .history-status {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .employee-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .employee-form-actions button {
+    width: 100%;
+  }
+
+  .hrd-quick-links {
     grid-template-columns: 1fr;
   }
 }
@@ -636,5 +1486,25 @@
 
   .profile-info {
     display: none;
+  }
+
+  .monitoring-filter-form {
+    grid-template-columns: 1fr;
+  }
+
+  .monitoring-filter-actions {
+    grid-column: auto;
+  }
+
+  .monitoring-filter-actions button {
+    flex: 1;
+  }
+
+  .photo-modal-overlay {
+    padding: 12px;
+  }
+
+  .photo-modal-content {
+    padding: 14px;
   }
 }
