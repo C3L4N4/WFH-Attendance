@@ -1,0 +1,22 @@
+@'
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+**/coverage/
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+
+# Uploaded files
+**/uploads/
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+'@ | Set-Content .gitignore
