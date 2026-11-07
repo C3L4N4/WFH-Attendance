@@ -69,7 +69,7 @@ Make sure you have the following installed:
 
 ```bash
 git clone https://github.com/C3L4N4/WFH-Attendance.git
-cd "WFH Attendance"
+cd WFH-Attendance
 ```
 
 ### 2. Set up the Database
